@@ -95,7 +95,7 @@ Press_configure(){
 Press_post_configure(){
     echo ""
     echo -e "Please continue your configuration on VBR console"
-    echo -e "${COLOR_GREEN}Press any key to disable ${set_vbruser}...or Press Ctrl+c to cancel${COLOR_END}"
+    echo -e "${COLOR_GREEN}Press any key to disable Veeam User: ${set_vbruser}...or Press Ctrl+c to cancel${COLOR_END}"
     OLDCONFIG=`stty -g`
     stty -icanon -echo min 1 time 0
     dd count=1 2>/dev/null
