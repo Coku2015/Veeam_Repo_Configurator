@@ -23,7 +23,8 @@ curl -O https://raw.githubusercontent.com/Coku2015/Veeam_Repo_Configurator/main/
 bash HLRepo_configurator.sh
 ```
 
-[![bkKxtH.png](https://s4.ax1x.com/2022/02/24/bkKxtH.png)](https://imgtu.com/i/bkKxtH)
-[![bkKzhd.png](https://s4.ax1x.com/2022/02/24/bkKzhd.png)](https://imgtu.com/i/bkKzhd)
 [![bkKvAe.png](https://s4.ax1x.com/2022/02/24/bkKvAe.png)](https://imgtu.com/i/bkKvAe)
 
+[![bkKzhd.png](https://s4.ax1x.com/2022/02/24/bkKzhd.png)](https://imgtu.com/i/bkKzhd)
+
+[![bkKxtH.png](https://s4.ax1x.com/2022/02/24/bkKxtH.png)](https://imgtu.com/i/bkKxtH)
