@@ -17,7 +17,7 @@ set_text_color(){
     COLOR_END='\E[0m'
 }
 
-# An set of disks to ignore from partitioning and formatting
+# A set of disks to ignore from partitioning and formatting
 BLACKLIST="/dev/sda"
 vgname="vg_veeam"
 lvname="lv_veeam"
