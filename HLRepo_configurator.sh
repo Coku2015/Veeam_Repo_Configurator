@@ -258,6 +258,7 @@ Get_sys_info
 # User input Repository
 echo
 echo "=========================================================="
+echo -e "${COLOR_PINK}Please input your Repository setting:${COLOR_END}"
 DISKS=($(scan_for_new_disks))
 echo "Found empty disks are ${DISKS[@]}"
 echo "Please select disk to proceed, input format: sdb,sdc,sdd"
@@ -269,8 +270,7 @@ else
     DISKS=($(add_new_disks "${set_disk}"))
     echo "Your selection is ${DISKS[@]}"
 fi
-echo -e "${COLOR_PINK}Please input your Repository setting:${COLOR_END}"
-echo
+echo "=========================================================="
 def_vbruser="veeamrepo"
 echo "Please input username for Veeam Repo User"
 read -p "(Default username: ${def_vbruser}):" set_vbruser
