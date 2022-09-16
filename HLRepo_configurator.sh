@@ -18,7 +18,6 @@ set_text_color(){
 }
 
 # A set of disks to ignore from partitioning and formatting
-BLACKLIST="/dev/sda"
 vgname="vg_veeam"
 lvname="lv_veeam"
 
@@ -105,12 +104,29 @@ Press_post_configure(){
 scan_for_new_disks() {
     # Looks for unpartitioned disks
     declare -a RET
-    DEVS=($(ls -1 /dev/sd*|egrep -v "${BLACKLIST}"|egrep -v "[0-9]$"))
+    DEVS=($(ls -1 /dev/sd*|egrep -v "[0-9]$"))
     for DEV in "${DEVS[@]}";
     do
         # Check each device if there is a "1" partition.  If not,
         # "assume" it is not partitioned.
         if [ ! -b ${DEV}1 ];
+        then
+            RET+="${DEV} "
+        fi
+    done
+    echo "${RET}"
+}
+
+add_new_disks() {
+    diskselection=${1}
+    # Looks for unpartitioned disks
+    declare -a RET
+    DEVS=($(ls -1 /dev/sd*|egrep -v "[0-9]$"))
+    for DEV in "${DEVS[@]}";
+    do
+        # Check each device if there is a "1" partition.  If not,
+        # "assume" it is not partitioned.
+        if [ ! -b ${DEV}1 ] && [[ $diskselection =~ ${DEV: 6} ]];
         then
             RET+="${DEV} "
         fi
@@ -191,8 +207,6 @@ finish_task(){
 
 Main_configure(){
     partitions=""
-    DISKS=($(scan_for_new_disks))
-    echo "Disks are ${DISKS[@]}"
     for DISK in "${DISKS[@]}";
     do
         is_partitioned ${DISK}
@@ -218,6 +232,7 @@ Main_configure(){
     UUID=($(blkid -s UUID -u filesystem /dev/vg_veeam/lv_veeam -o value))
     add_to_fstab "${UUID}" "${set_path}" "xfs"
     echo "Mounting volume $lvpath on $set_path"
+    sleep 15
     mount "$set_path"
     useradd -m ${set_vbruser}
     echo ${set_vbruser}:${set_vbrpass} | chpasswd
@@ -243,6 +258,17 @@ Get_sys_info
 # User input Repository
 echo
 echo "=========================================================="
+DISKS=($(scan_for_new_disks))
+echo "Found empty disks are ${DISKS[@]}"
+echo "Please select disk to proceed, input format: sdb,sdc,sdd"
+read -p "(Default selection is all your empty disks):" set_disk
+if [ -z "${set_disk}" ];
+then
+    echo "Your selection is ${DISKS[@]}" 
+else
+    DISKS=($(add_new_disks "${set_disk}"))
+    echo "Your selection is ${DISKS[@]}"
+fi
 echo -e "${COLOR_PINK}Please input your Repository setting:${COLOR_END}"
 echo
 def_vbruser="veeamrepo"
