@@ -255,6 +255,12 @@ set_text_color
 cur_dir=$(pwd)
 clearscreen "clear"
 Get_sys_info
+# lsblk information
+echo
+echo "=========================================================="
+echo -e "${COLOR_PINK}lsblk information:${COLOR_END}"
+lsblk
+echo "=========================================================="
 # User input Repository
 echo
 echo "=========================================================="
