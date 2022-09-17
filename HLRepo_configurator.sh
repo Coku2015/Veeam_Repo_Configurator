@@ -17,7 +17,7 @@ set_text_color(){
     COLOR_END='\E[0m'
 }
 
-# A set of disks to ignore from partitioning and formatting
+# LVM name settings
 vgname="vg_veeam"
 lvname="lv_veeam"
 
