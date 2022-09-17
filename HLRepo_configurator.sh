@@ -124,8 +124,6 @@ add_new_disks() {
     DEVS=($(ls -1 /dev/sd*|egrep -v "[0-9]$"))
     for DEV in "${DEVS[@]}";
     do
-        # Check each device if there is a "1" partition.  If not,
-        # "assume" it is not partitioned.
         if [ ! -b ${DEV}1 ] && [[ $diskselection =~ ${DEV: 6} ]];
         then
             RET+="${DEV} "
@@ -231,8 +229,8 @@ Main_configure(){
     mkdir $set_path
     UUID=($(blkid -s UUID -u filesystem /dev/vg_veeam/lv_veeam -o value))
     add_to_fstab "${UUID}" "${set_path}" "xfs"
-    echo "Mounting volume $lvpath on $set_path"
     sleep 15
+    echo "Mounting volume $lvpath on $set_path"
     mount "$set_path"
     useradd -m ${set_vbruser}
     echo ${set_vbruser}:${set_vbrpass} | chpasswd
@@ -251,6 +249,8 @@ Post_configure(){
     echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
     finish_task
 }
+
+# Main script body
 set_text_color
 cur_dir=$(pwd)
 clearscreen "clear"
