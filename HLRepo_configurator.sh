@@ -33,9 +33,11 @@ clearscreen(){
     echo "+----------------------------------------------------------------+"
     echo "|  A tool to pre-config Veeam Hardened Linux Repository on Linux  |"
     echo "+-----------------------------------------------------------------+"
-    echo "|This tool is tested with CentOS 8.5 RHEL 8.2/8.4/8.5 Ubuntu 20.04|"
+    echo "|  This tool has been tested in CentOS 8.5/CentOS Stream          |"
+    echo "|  RHEL 8.2/8.4/8.5   Ubuntu 20.04/22.04                          |"
     echo "+-----------------------------------------------------------------+"
     echo "|  Intro: ${contact_us}                           |"
+    echo "|  Bug Report: Lei.wei@veeam.com                                  |"
     echo "+-----------------------------------------------------------------+"
     echo ""
 }
