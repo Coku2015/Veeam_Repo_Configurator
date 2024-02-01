@@ -17,6 +17,8 @@ set_text_color(){
     COLOR_END='\E[0m'
 }
 
+export LC_ALL=C
+
 # LVM name settings
 vgname="vg_veeam"
 lvname="lv_veeam"
@@ -34,7 +36,7 @@ clearscreen(){
     echo "|  A tool to pre-config Veeam Hardened Linux Repository on Linux  |"
     echo "+-----------------------------------------------------------------+"
     echo "|  This tool has been tested in CentOS 8.5/CentOS Stream          |"
-    echo "|  RHEL 8.2/8.4/8.5   Ubuntu 20.04/22.04                          |"
+    echo "|  RHEL 8.2~9.3       Ubuntu 20.04/22.04                          |"
     echo "+-----------------------------------------------------------------+"
     echo "|  Intro: ${contact_us}                           |"
     echo "|  Bug Report: Lei.wei@veeam.com                                  |"
@@ -143,7 +145,7 @@ is_partitioned() {
 
 do_partition() {
     parted ${1} mklabel gpt >/dev/null 2>&1
-    parted ${1} mkpart vbrrepo 1 100% >/dev/null 2>&1
+    parted -a opt -s ${1} mkpart vbrrepo 0% 100% >/dev/null 2>&1
 }
 
 has_filesystem() {
